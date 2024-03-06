@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --work-color: black;
-    --break-color: grey;
-    --light-100: #f8f8f8;
+    --work-color: #222E39;
+    --break-color: #FCA81A;
+    --break-color-bright: #FFCC00;
+    --light-100: #F8F8F8;
 }
 
 * {
@@ -12,6 +13,9 @@
     box-sizing: border-box;
     border: none;
     outline: none;
+    background: transparent;
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
     color: var(--light-100);
+    scrollbar-width: thin;
+    scrollbar-color: var(--work-color) var(--light-100);
 }

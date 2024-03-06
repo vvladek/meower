@@ -1,0 +1,85 @@
+main {
+    display: grid;
+    place-items: center;
+    place-content: space-between center;
+    height: 100dvh;
+    background: var(--work-color);
+    padding: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.break-background-color {
+    background: var(--break-color);
+}
+
+.round__title {
+    display: grid;
+    align-content: center;
+    width: fit-content;
+    height: 42px;
+    background: url(../../public/svg/cat.svg) no-repeat left center;
+    background-size: 30px 30px;
+    font-size: 42px;
+    padding-left: 42px;
+}
+
+.tracker {
+    display: grid;
+    gap: 10px;
+}
+
+.timer {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+}
+
+.timer h1 {
+    font-size: 96px;
+}
+
+.timer__minutes {
+    width: 40%;
+    text-align: right;
+}
+
+.timer__separator {
+    width: 20%;
+    text-align: center;
+}
+
+.timer__seconds {
+    width: 40%;
+    text-align-last: left;
+}
+
+.control__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.control__buttons button {
+    width: 160px;
+    height: 40px;
+    border: 3px solid var(--light-100);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.1s ease-in-out;
+}
+
+.control__buttons button:hover {
+    backdrop-filter: brightness(90%);
+}
+
+.control__buttons button:active {
+    scale: 0.95;
+}
+
+.long__break__info {
+    font-weight: 500;
+    opacity: 0.75;
+}
