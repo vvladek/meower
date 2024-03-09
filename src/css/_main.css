@@ -4,8 +4,8 @@ main {
     place-content: space-between center;
     height: 100dvh;
     background: var(--work-color);
-    padding: 15px;
-    transition: all 0.5s ease-in-out;
+    padding: 15px 10px 30px;
+    transition: 0.5s ease-in-out;
 }
 
 .break-background-color {
@@ -62,24 +62,8 @@ main {
 .control__buttons button {
     width: 160px;
     height: 40px;
-    border: 3px solid var(--light-100);
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    transition: all 0.1s ease-in-out;
-}
-
-.control__buttons button:hover {
-    backdrop-filter: brightness(90%);
-}
-
-.control__buttons button:active {
-    scale: 0.95;
 }
 
 .long__break__info {
-    font-weight: 500;
     opacity: 0.75;
 }

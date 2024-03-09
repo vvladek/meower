@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" href="./svg/pomodoro-icon.svg" type="image/x-icon">
     <title>Meower</title>
 </head>
 <body>
@@ -22,11 +23,30 @@
             </div>
         </div>
         <h5 class="long__break__info">It is impossible to know the end time while the application is paused.</h5>
-        <audio src="../public/audio/meow.mp3" preload="auto"></audio>
+        <audio src="./audio/meow.mp3" preload="auto"></audio>
     </main>
 
     <section class="logs">
-        <div></div>
+        <h2>Logs</h2>
+        <div class="logs__container"></div>
+    </section>
+
+    <section class="settings">
+        <form>
+            <div class="input__container">
+                <p>Work 1</p>
+                <input type="text" placeholder="50">
+            </div>
+            <div class="input__container">
+                <p>Break 1</p>
+                <input type="text" placeholder="10">
+            </div>
+        </form>
+        <div class="setting__buttons">
+            <button class="add__round__button">ADD</button>
+            <button class="del__round__button">DEL</button>
+            <button class="set__new__list__button">SET</button>
+        </div>
     </section>
 
     <script src="./js/main.js" type="module"></script>

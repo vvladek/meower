@@ -1,0 +1,45 @@
+.settings {
+    display: grid;
+    place-content: start center;
+    place-items: start center;
+    gap: 30px;
+    min-height: 100dvh;
+    background: var(--work-color);
+    padding: 60px 10px;
+}
+
+.settings form {
+    display: grid;
+    gap: 5px;
+}
+
+.input__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    border: 2px solid var(--light-100);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.input__container p {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.input__container input {
+    text-align: center;
+    width: 40px;
+    height: 25px;
+    border: 2px solid var(--light-100);
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.setting__buttons button {
+    width: 80px;
+    height: 35px;
+    font-size: 13px;
+}

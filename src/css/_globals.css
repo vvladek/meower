@@ -15,7 +15,30 @@
     outline: none;
     background: transparent;
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-weight: 500;
     color: var(--light-100);
     scrollbar-width: thin;
     scrollbar-color: var(--work-color) var(--light-100);
+}
+
+h1, h2 {
+    font-weight: 700;
+}
+
+button {
+    border: 3px solid var(--light-100);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.1s ease-in-out;
+}
+
+button:hover {
+    backdrop-filter: brightness(90%);
+}
+
+button:active {
+    scale: 0.95;
 }

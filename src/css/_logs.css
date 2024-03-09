@@ -1,3 +1,39 @@
 .logs {
-    height: 100dvh;
+    display: grid;
+    place-content: start center;
+    place-items: start center;
+    gap: 60px;
+    min-height: 50dvh;
+    padding: 60px 10px;
+}
+
+.logs h2 {
+    color: var(--work-color);
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.logs__container {
+    display: grid;
+    place-items: center;
+    gap: 30px;
+}
+
+.log {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.log p {
+    color: var(--work-color);
+    font-size: 15px;
+}
+
+.log p:nth-child(1) {
+    text-align: left;
+}
+
+.log p:nth-child(2) {
+    text-align: right;
 }

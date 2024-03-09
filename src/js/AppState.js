@@ -2,6 +2,10 @@
 export class AppState {
 
     constructor (state) {
+        this.setState(state)
+    }
+
+    setState (state) {
         this.intervals = state.intervals
         this.round = state.round
         this.pointer = state.pointer
@@ -14,7 +18,6 @@ export class AppState {
         this.isPaused = !this.isPaused
         if (!this.isPaused) {
             this.startTime = Date.now()
-            this.intervals[this.pointer] = this.remainingTime
         } else {
             this.remainingTime = this.getNewRemainigTime()
         }
@@ -24,7 +27,12 @@ export class AppState {
         this.pointer += 1
         this.round = Math.floor(this.pointer / 2) + 1
         this.startTime = Date.now()
-        this.remainingTime = this.intervals[this.pointer]
+        this.remainingTime = this.intervals[this.pointer % this.intervals.length]
+        this.isPaused = this.pointer % 2 ? false : true
+    }
+
+    getRoundType () {
+        return this.pointer % 2 ? "Break" : "Work"
     }
 
     getNewRemainigTime () {
