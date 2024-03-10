@@ -1,41 +1,55 @@
-import { DOMController } from "./DOMController.js"
 import { AppState } from "./AppState.js"
+import { initialState, initialLogsList } from "./initialValues.js"
+import { DOMController } from "./DOMController.js"
 import { LogsController } from "./LogsController.js"
 import { InputsController } from "./InputsController.js"
 
 
-const defaultIntervalsList = [50, 10, 50, 10, 50, 10, 50, 20].map(interval => interval * 60000)
-
-
-const state = new AppState({ intervals: defaultIntervalsList, round: 1, pointer: 0, isPaused: true })
+const state = new AppState(initialState)
 const domController = new DOMController(state)
-const logsController = new LogsController()
+const logsController = new LogsController(initialLogsList)
 const inputsController = new InputsController(state.intervals)
 
 
+appWorker.addEventListener('message', () => {
+    if (!state.isPaused) {
+        const newRemainingTime = state.getNewRemainigTime()
+        domController.setNewTime(newRemainingTime)
+        if (newRemainingTime < 100) {
+            logsController.addLog("finished", state)
+            state.setNextRound()
+            domController.setNextRound(state)
+            if (!state.isPaused) logsController.addLog("start", state)
+        }
+    }
+}, false)
+
+
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("start__button")) {
-        state.toggleStartAndPause()
-        logsController.addLog("start", state)
-    }
-    else if (event.target.classList.contains("finish__button")) {
-        logsController.addLog("finished", state)
-        state.setNextRound()
-        domController.setNextRound(state)
-        if (!state.isPaused) logsController.addLog("start", state)
-    }
-    else if (event.target.classList.contains("add__round__button")) {
-        inputsController.addInputRound()
-    }
-    else if (event.target.classList.contains("del__round__button")) {
-        inputsController.deleteLastInputRound()
-    }
-    else if (event.target.classList.contains("set__new__list__button")) {
-        state.setState({ intervals: inputsController.newList, round: 1, pointer: 0, isPaused: true })
-        inputsController.refreshInputsList()
-        domController.setNextRound(state)
-        logsController.setLogsList([])
-    }
+    switch (event.target.classList.value) {
+        case "start__button":
+            state.toggleStartAndPause()
+            logsController.addLog("start", state)
+            break
+        case "finish__button":
+            logsController.addLog("finished", state)
+            state.setNextRound()
+            domController.setNextRound(state)
+            if (!state.isPaused) logsController.addLog("start", state)
+            break
+        case "add__round__button":
+            inputsController.addInputRound()
+            break
+        case "del__round__button":
+            inputsController.deleteLastInputRound()
+            break
+        case "set__new__list__button":
+            state.setState({ intervals: inputsController.newList, round: 1, pointer: 0, isPaused: true })
+            inputsController.refreshInputsList()
+            domController.setNextRound(state)
+            logsController.setLogsList([])
+            break
+    }   
     domController.refreshStartButtonTextContent(state.isPaused)
 })
 
@@ -45,13 +59,16 @@ document.addEventListener("input", (event) => {
 })
 
 
-setInterval(() => {
-    if (!state.isPaused) {
-        const newRemainingTime = state.getNewRemainigTime()
-        domController.setNewTime(newRemainingTime)
-        if (newRemainingTime < 100) {
-            state.setNextRound()
-            domController.setNextRound(state)
-        }
-    }
-}, 1000)
+window.addEventListener("pagehide", () => {
+    localStorage.setItem("MEOWER", JSON.stringify({
+        storageTime: Date.now(),
+        storageState: {
+            intervals: state.intervals,
+            round: state.round,
+            pointer: state.pointer,
+            remainingTime: state.gg(),
+            isPaused: true
+        },
+        storageLogsList: logsController.list
+    }))
+})

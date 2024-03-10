@@ -12,6 +12,8 @@ export class AppState {
         this.startTime = Date.now()
         this.remainingTime = state.intervals[state.pointer]
         this.isPaused = state.isPaused
+        if (state.remainingTime) this.remainingTime = state.remainingTime
+        if (state.startTime) this.startTime = state.startTime
     }
 
     toggleStartAndPause () {

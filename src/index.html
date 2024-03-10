@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="shortcut icon" href="./svg/pomodoro-icon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./svg/work-icon.svg" type="image/x-icon" class="title__icon">
     <title>Meower</title>
 </head>
 <body>
@@ -48,6 +48,12 @@
             <button class="set__new__list__button">SET</button>
         </div>
     </section>
+
+
+    <script>
+        const appWorker = new Worker("./js/appWorker.js")
+        appWorker.postMessage("start")
+    </script>
 
     <script src="./js/main.js" type="module"></script>
 </body>

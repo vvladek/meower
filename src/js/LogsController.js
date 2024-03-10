@@ -3,8 +3,8 @@ export class LogsController {
 
     #logsContainer = document.querySelector(".logs__container")
 
-    constructor () {
-        this.list = []
+    constructor (list) {
+        this.list = list
         this.#renderLogsList()
     }
 

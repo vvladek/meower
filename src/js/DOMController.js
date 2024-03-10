@@ -2,6 +2,7 @@
 export class DOMController {
 
     #timeInHeadTitle = document.querySelector("title")
+    #headTitleIcon = document.querySelector(".title__icon")
     #minutesInMainTitle = document.querySelector(".timer__minutes")
     #secondsInMainTitle = document.querySelector(".timer__seconds")
     #roundInMainTitle = document.querySelector(".round__title")
@@ -10,7 +11,7 @@ export class DOMController {
     #startButton = document.querySelector(".start__button")
 
     constructor (state) {
-        this.#setBackgroundColor(state.pointer)
+        this.#setColorScheme(state.pointer)
         this.#setTitles(state)
     }
 
@@ -20,7 +21,7 @@ export class DOMController {
 
     setNextRound (state) {
         this.#setTitles(state)
-        this.#setBackgroundColor(state.pointer)
+        this.#setColorScheme(state.pointer)
         this.#audio.play()
         this.refreshStartButtonTextContent(state.isPaused)
     }
@@ -38,9 +39,14 @@ export class DOMController {
         this.#roundInMainTitle.textContent = state.round
     }
 
-    #setBackgroundColor (pointer) {
-        if (pointer % 2) this.#main.classList.add("break-background-color")
-        else this.#main.classList.remove("break-background-color")
+    #setColorScheme (pointer) {
+        if (pointer % 2) {
+            this.#main.classList.add("break-background-color")
+            this.#headTitleIcon.href = "./svg/break-icon.svg"
+        } else {
+            this.#main.classList.remove("break-background-color")
+            this.#headTitleIcon.href = "./svg/work-icon.svg"
+        }
     }
 
     #normalizeValue (value) {
