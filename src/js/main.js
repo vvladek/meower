@@ -5,7 +5,7 @@ import { LogsController } from "./LogsController.js"
 import { InputsController } from "./InputsController.js"
 
 
-const appWorker = new Worker("./js/appWorker.js")
+const appWorker = new Worker(new URL("./appWorker.js", import.meta.url))
 const state = new AppState(initialState)
 const domController = new DOMController(state)
 const logsController = new LogsController(initialLogsList)
