@@ -1,0 +1,40 @@
+{
+    "name": "Meower",
+    "short_name": "Meower",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#F8F8F8",
+    "description": "Meower app like pomodoro tracker.",
+    "icons": [
+      {
+        "src": "/svg/cat.svg",
+        "sizes": "48x48",
+        "type": "image/svg"
+      },
+      {
+        "src": "/svg/cat.svg",
+        "sizes": "72x72",
+        "type": "image/svg"
+      },
+      {
+        "src": "/svg/cat.svg",
+        "sizes": "96x96",
+        "type": "image/svg"
+      },
+      {
+        "src": "i/svg/cat.svg",
+        "sizes": "144x144",
+        "type": "image/svg"
+      },
+      {
+        "src": "i/svg/cat.svg",
+        "sizes": "168x168",
+        "type": "image/svg"
+      },
+      {
+        "src": "i/svg/cat.svg",
+        "sizes": "192x192",
+        "type": "image/svg"
+      }
+    ]
+  }
