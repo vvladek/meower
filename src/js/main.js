@@ -5,51 +5,68 @@ import { LogsController } from "./LogsController.js"
 import { InputsController } from "./InputsController.js"
 
 
+const appWorker = new Worker("./js/appWorker.js")
 const state = new AppState(initialState)
 const domController = new DOMController(state)
 const logsController = new LogsController(initialLogsList)
 const inputsController = new InputsController(state.intervals)
 
 
-appWorker.addEventListener('message', () => {
+function finishRound () {
+    logsController.addLog("finished", state)
+    state.setNextRound()
+    domController.setNextRound(state)
+    appWorker.postMessage("stop")
     if (!state.isPaused) {
-        const newRemainingTime = state.getNewRemainigTime()
-        domController.setNewTime(newRemainingTime)
-        if (newRemainingTime < 100) {
-            logsController.addLog("finished", state)
-            state.setNextRound()
-            domController.setNextRound(state)
-            if (!state.isPaused) logsController.addLog("start", state)
-        }
+        appWorker.postMessage(`start-${state.remainingTime}`)
+        logsController.addLog("started", state)
     }
+}
+
+
+appWorker.addEventListener('message', (event) => {
+    const newRemainingTime = event.data
+    state.setRemainigTime(newRemainingTime)
+    domController.setNewTime(newRemainingTime)
+    if (newRemainingTime < 100) finishRound()
 }, false)
 
 
 document.addEventListener("click", (event) => {
-    switch (event.target.classList.value) {
-        case "start__button":
-            state.toggleStartAndPause()
-            logsController.addLog("start", state)
+    switch (event.target.textContent) {
+        case "START": {
+            appWorker.postMessage(`start-${state.remainingTime}`)
+            state.setIsPaused(false)
+            logsController.addLog("started", state)
             break
-        case "finish__button":
-            logsController.addLog("finished", state)
-            state.setNextRound()
-            domController.setNextRound(state)
-            if (!state.isPaused) logsController.addLog("start", state)
+        }
+        case "PAUSE": {
+            appWorker.postMessage("stop")
+            state.setIsPaused(true)
+            logsController.addLog("paused", state)
             break
-        case "add__round__button":
+        }
+        case "FINISH": {
+            finishRound()
+            break
+        }
+        case "ADD": {
             inputsController.addInputRound()
             break
-        case "del__round__button":
+        }
+        case "DEL": {
             inputsController.deleteLastInputRound()
             break
-        case "set__new__list__button":
-            state.setState({ intervals: inputsController.newList, round: 1, pointer: 0, isPaused: true })
+        }
+        case "SET": {
+            appWorker.postMessage("stop")
+            state.setState({ intervals: inputsController.newList, round: 1, pointer: 0 })
             inputsController.refreshInputsList()
             domController.setNextRound(state)
             logsController.setLogsList([])
             break
-    }   
+        }
+    }
     domController.refreshStartButtonTextContent(state.isPaused)
 })
 
@@ -66,8 +83,7 @@ window.addEventListener("pagehide", () => {
             intervals: state.intervals,
             round: state.round,
             pointer: state.pointer,
-            remainingTime: state.gg(),
-            isPaused: true
+            remainingTime: state.remainingTime
         },
         storageLogsList: logsController.list
     }))

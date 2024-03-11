@@ -14,7 +14,6 @@ export class LogsController {
     }
 
     addLog (action, state) {
-        if (action === "start") action = state.isPaused ? "paused" : "started"
         this.list.push({
             text: `${state.getRoundType()} round ${state.round} ${action}`,
             time: Date()

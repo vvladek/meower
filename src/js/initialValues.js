@@ -4,8 +4,7 @@
 let initialState = {
     intervals: [ 3_000_000, 600_000, 3_000_000, 600_000, 3_000_000, 600_000, 3_000_000, 1_200_000 ],
     round: 1,
-    pointer: 0,
-    isPaused: true
+    pointer: 0
 }
 
 let initialLogsList = []
