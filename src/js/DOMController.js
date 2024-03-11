@@ -7,7 +7,7 @@ export class DOMController {
     #secondsInMainTitle = document.querySelector(".timer__seconds")
     #roundInMainTitle = document.querySelector(".round__title")
     #main = document.querySelector("main")
-    #audio = document.querySelector("audio")
+    // #audio = document.querySelector("audio")
     #startButton = document.querySelector(".start__button")
 
     constructor (state) {
@@ -22,7 +22,8 @@ export class DOMController {
     setNextRound (state) {
         this.#setTitles(state)
         this.#setColorScheme(state.pointer)
-        this.#audio.play()
+        // this.#audio.play()
+        new Audio(new URL("./audio/meow.mp3", import.meta.url)).play()
         this.refreshStartButtonTextContent(state.isPaused)
     }
 
