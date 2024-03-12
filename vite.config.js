@@ -15,5 +15,5 @@ export default {
     ],
     workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,ogg}'],
-      }
     }
+}

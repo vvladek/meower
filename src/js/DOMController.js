@@ -42,10 +42,10 @@ export class DOMController {
     #setColorScheme (pointer) {
         if (pointer % 2) {
             this.#main.classList.add("break-background-color")
-            this.#headTitleIcon.href = new URL("./svg/break-icon.svg", import.meta.url)
+            this.#headTitleIcon.href = new URL("/svg/break-icon.svg", import.meta.url)
         } else {
             this.#main.classList.remove("break-background-color")
-            this.#headTitleIcon.href = new URL("./svg/work-icon.svg", import.meta.url)
+            this.#headTitleIcon.href = new URL("/svg/work-icon.svg", import.meta.url)
         }
     }
 
