@@ -23,6 +23,7 @@
     display: flex;
     justify-content: space-between;
     width: 400px;
+    max-width: calc(100vw - 20px);
 }
 
 .log p {
